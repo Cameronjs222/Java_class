@@ -1,5 +1,3 @@
-package CafeBusinessLogic;
-
 import java.util.ArrayList;
 
 public class CafeLogic {
@@ -11,20 +9,19 @@ public class CafeLogic {
         }
         return total;
     } 
-    double getOrderPrices(double[] prices) {
+    public double getOrderPrices(double[] prices) {
         double total = 0;
         for (double price : prices) {
             total += price;
         }
         return total;
     }
-    void displayMenu(ArrayList<String> menuItems) {
+    public void displayMenu(ArrayList<String> menuItems) {
         for (String item : menuItems) {
             int index = menuItems.indexOf(item);
             System.out.println(index + " " + item);
         }
     }
-
 
     public void addCustomer(ArrayList<String> customerList) {
         System.out.println("Please enter your name:");
@@ -36,3 +33,5 @@ public class CafeLogic {
     }
 
 }
+
+

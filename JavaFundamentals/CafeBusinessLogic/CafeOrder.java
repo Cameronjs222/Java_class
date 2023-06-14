@@ -29,5 +29,8 @@ public class CafeOrder {
     public ArrayList<String> getItems() {
         return items;
     }
-    
+
+    public void addItem(String item) {
+        items.add(item);
+    }
 }

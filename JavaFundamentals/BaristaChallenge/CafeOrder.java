@@ -6,7 +6,7 @@ public class CafeOrder {
     // instance variables
     public String name;
     public double total;
-    public boolean ready;
+    public boolean ready =false;
     private ArrayList<CafeItem> items;
 
     // constructor
@@ -34,9 +34,9 @@ public class CafeOrder {
     
     public String getStatusMessage () {
         if (ready) {
-            return "Ready for pickup";
+            return this.getName() + ": Order is ready for pickup";
         } else {
-            return "Waiting for pickup";
+            return this.getName() + ": Waiting for pickup";
         }
     }
     
@@ -49,11 +49,13 @@ public class CafeOrder {
     }
     
     public void display() {
-        System.out.println("Order for " + name);
-        for(CafeItem item : items){
-            System.out.println(item.getName() + " - $" + item.getPrice());
+        System.out.println(getStatusMessage());
+        if (ready) {
+            for(CafeItem item : items){
+                System.out.println(item.getName() + " - $" + item.getPrice());
+            }
+            System.out.println("Total: $" + getOrderTotal());
         }
-        System.out.println("Total: $" + getOrderTotal());
     }
     
     // getters and setters

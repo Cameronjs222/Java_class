@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author camer
- *
- */
-module test {
-}

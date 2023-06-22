@@ -1,0 +1,25 @@
+@charset "ISO-8859-1";
+
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	height: 100vh;
+}
+
+h1 {
+	margin-right: 10vh;
+	color: pink
+}
+
+.box {
+	border: 10px solid pink;
+	width: 20vh
+}
+
+.fruitItem {
+	border: 2px solid pink;
+	padding: 20px
+}

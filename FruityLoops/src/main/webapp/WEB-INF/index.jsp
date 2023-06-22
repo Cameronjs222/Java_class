@@ -7,16 +7,17 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/style.css">
+<script type="text/javascript" src="/js/app.js"></script>
 </head>
 <body>
 
-	<div
-		style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; height: 100vh;">
-		<h1 style="margin-right: 10vh; color: pink">Fruit List</h1>
+	<div class="container">
+		<h1>Fruit List</h1>
 		<div
-			style="border: 10px solid pink; width: 20vh; color: black">
+			class="box">
 			<c:forEach var="fruit" items="${listOfFruitItems}">
-				<div style="border: 2px solid pink; padding: 20px">${fruit.name}, ${fruit.price}</div>
+				<div class="fruitItem">${fruit.name}, ${fruit.price}</div>
 			</c:forEach>
 
 		</div>

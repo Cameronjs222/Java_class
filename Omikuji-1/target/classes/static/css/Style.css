@@ -1,0 +1,23 @@
+@charset "ISO-8859-1";
+
+.container {
+	display: flex; 
+	flex-direction: column; 
+	width: 100vw; 
+	justify-content: center; 
+	align-items: center; 
+}
+
+.content {
+	border: 2px solid black; 
+	padding: 10px; 
+	display: flex; 
+	justify-content:start; 
+	flex-direction: column
+
+}
+
+.show {
+	width: 30vw;
+	background-color: rgb(159,197,248)
+}

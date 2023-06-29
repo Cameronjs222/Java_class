@@ -1,6 +1,7 @@
 package com.books.cameron.controllers;
 
-import java.util.List;
+import java.util.ArrayList;
+
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.books.cameron.models.Book;
 import com.books.cameron.services.BookService;
+
+import jakarta.servlet.http.HttpSession;
 @RestController
 public class BookContoller {
     private final BookService bookService;
@@ -41,13 +44,23 @@ public class BookContoller {
     }
     
     @RequestMapping(value="/api/books", method=RequestMethod.GET)
-    public List<Book> findAllBooks() {
-        return bookService.getAllBooks();
-    }
-    
+    public ArrayList<Book> findAllBooks(HttpSession session) {
+        ArrayList<Book> allbooks = new ArrayList<Book>();
+        allbooks.addAll(bookService.getAllBooks());
+        session.setAttribute("books", allbooks);
+        System.out.print(session.getAttribute("books"));
+        return allbooks;
+    }   
     
     @RequestMapping(value="/api/books/{id}", method=RequestMethod.DELETE)
     public void destroy(@PathVariable("id") Long id) {
         bookService.deleteBook(id);
+    }
+    
+    @RequestMapping(value="/api/books/{id}", method=RequestMethod.GET)
+    public Book findOneBook(@PathVariable("id") Long id) {
+    	Book singleBook = bookService.findBook(id);
+		return singleBook;
+    	
     }
 }

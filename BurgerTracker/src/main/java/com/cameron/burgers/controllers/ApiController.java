@@ -10,7 +10,7 @@ import com.cameron.burgers.models.Burger;
 import com.cameron.burgers.service.BurgerService;
 
 @RestController
-@RequestMapping(path="/api/burger")
+@RequestMapping(path="/burger")
 public class ApiController {
     @Autowired
     private BurgerService burgerService;

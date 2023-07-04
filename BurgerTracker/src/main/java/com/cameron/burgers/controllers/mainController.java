@@ -19,11 +19,12 @@ import com.cameron.burgers.service.BurgerService;
 import jakarta.validation.Valid;
 
 @Controller
+@RequestMapping("/burgers")
 public class mainController {
 	@Autowired
 	BurgerService burgerService;
 	
-	@GetMapping("/burgers")
+	@GetMapping("")
 	public String home(@ModelAttribute("burger") Burger burger, Model model) {
 		List<Burger> allBurgers = burgerService.getAllBurgers();
 		model.addAttribute("burgers", allBurgers);
@@ -44,12 +45,29 @@ public class mainController {
 	    }
 	}
 
-	@RequestMapping("/burgers/{id}")
+	@RequestMapping("/{id}")
 	public String specificBookById(@PathVariable("id") Long id, Model model) {
-		Optional<Burger> singleBurger = burgerService.getBurgerById(id);
-		model.addAttribute("Burger", singleBurger);
-		
-		return "OneBurger.jsp";
+		model.addAttribute("burgerToEdit", this.burgerService.getBurgerById(id));
+		return "edit.jsp";
 		
 	}
+	
+	@PostMapping(value="/update/{id}")
+    public String update(@Valid @ModelAttribute("burgerToEdit") Burger burger, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("Burger", burger);
+            return "edit.jsp";
+        } else {
+            this.burgerService.updateBurger(burger);
+            return "redirect:/burgers";
+        }
+    }
+	
+	@RequestMapping("/delete/{id}")
+	public String delete(@PathVariable("id")Long id) {
+		this.burgerService.deleteBurgerById(id);
+		return "redirect:/burgers";
+		
+	}
+
 }

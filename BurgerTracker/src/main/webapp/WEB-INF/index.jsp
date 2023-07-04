@@ -23,13 +23,14 @@
 				<th>Burger Name</th>
 				<th>RestaurantName</th>
 				<th>Rating</th>
+				<th>Delete Burger</th>
 			</tr>
 			<c:forEach var="burger" items="${burgers}">
 				<tr>
-					<td>${burger.burgerName}</td>
-					<td><a href="/books/${burger.id}">${burger.restaurantName}</a></td>
+					<td><a href="/burgers/${burger.id}">${burger.burgerName}</a></td>
+					<td>${burger.restaurantName}</td>
 					<td>${burger.rating}</td>
-					<%--    <td>${book.numberOfPages}</td>--%>
+					<td><a href="/burgers/delete/${burger.id}">Delete</a></td>
 				</tr>
 			</c:forEach>
 		</table>
@@ -39,7 +40,7 @@
 
 	<div class="centered">
 
-		<form:form action="/add" method="post" modelAttribute="burger">
+		<form:form action="/burgers/add" method="post" modelAttribute="burger">
 			<p>
 				<form:label path="burgerName">Burger Name: </form:label>
 				<form:input path="burgerName" /><br/>

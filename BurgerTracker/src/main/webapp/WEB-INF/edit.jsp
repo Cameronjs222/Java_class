@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ page isErrorPage="true"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,35 +13,34 @@
 </head>
 
 <body>
-	<h2>Update Burger</h2>
 
-	<div class="centered">
-		<form action="/burgers/update/${burgerToEdit.id }" method="POST" modelAttribute="burgerToEdit">
+	<div class="burger-form">
+		<h2>Update Burger</h2>
+
+		<form:form action="/burgers/update/${burgerToEdit.id}" method="post" modelAttribute="burgerToEdit">
 			<p>
-				<label for="burgerName">Burger Name:</label> <input type="text"
-					id="burgerName" name="burgerName"
-					value="<c:out value='${burgerToEdit.burgerName}'/>" /><br />
+				<form:label path="burgerName">Burger Name: </form:label>
+				<form:input path="burgerName" /><br/>
+				<form:errors path="burgerName" />
 			</p>
 			<p>
-				<label for="restaurantName">Restaurant Name:</label>
-				<textarea id="restaurantName" name="restaurantName"><c:out
-						value='${burgerToEdit.restaurantName}' /></textarea>
-				<br />
+				<form:label path="restaurantName">Restaurant name: </form:label>
+				<form:input path="restaurantName" /><br/>
+				<form:errors path="restaurantName" />
 			</p>
 			<p>
-				<label for="rating">Rating out of 5:</label> <input type="number"
-					id="rating" name="rating"
-					value="<c:out value='${burgerToEdit.rating}'/>" /><br />
+				<form:label path="rating">Rating out of 5? </form:label>
+				<form:input type="number" path="rating" /><br/>
+				<form:errors path="rating" />
 			</p>
 			<p>
-				<label for="notes">Notes on Burger:</label> <input type="text"
-					id="notes" name="notes"
-					value="<c:out value='${burgerToEdit.notes}'/>" /><br />
+				<form:label path="notes">Notes on the burger? </form:label>
+				<form:textarea path="notes" /><br/>
+				<form:errors path="notes" />
 			</p>
-			<input type="submit" value="Update" />
-		</form>
+			<input type="submit" value="Submit" />
+		</form:form>
 
 	</div>
-		<a href="/burgers">Home</a>
 </body>
 </html>

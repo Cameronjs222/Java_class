@@ -45,8 +45,8 @@ public class mainController {
 	    }
 	}
 
-	@RequestMapping("/{id}")
-	public String specificBookById(@PathVariable("id") Long id, Model model) {
+	@RequestMapping("/edit/{id}")
+	public String editBurgerById(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("burgerToEdit", this.burgerService.getBurgerById(id));
 		return "edit.jsp";
 		
@@ -67,6 +67,13 @@ public class mainController {
 	public String delete(@PathVariable("id")Long id) {
 		this.burgerService.deleteBurgerById(id);
 		return "redirect:/burgers";
+		
+	}
+	
+	@RequestMapping("/{id}")
+	public String specificBookById(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("burgerToEdit", this.burgerService.getBurgerById(id));
+		return "oneBurger.jsp";
 		
 	}
 

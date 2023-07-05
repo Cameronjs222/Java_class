@@ -15,30 +15,30 @@
 </head>
 
 <body>
-	<h2>Burgers:</h2>
 
-	<div class="centered">
+	<div class="burger-info">
+	<h2>Burgers:</h2>
 		<table>
 			<tr>
 				<th>Burger Name</th>
 				<th>RestaurantName</th>
 				<th>Rating</th>
-				<th>Delete Burger</th>
+				<th>Actions</th>
 			</tr>
 			<c:forEach var="burger" items="${burgers}">
 				<tr>
 					<td><a href="/burgers/${burger.id}">${burger.burgerName}</a></td>
 					<td>${burger.restaurantName}</td>
 					<td>${burger.rating}</td>
-					<td><a href="/burgers/delete/${burger.id}">Delete</a></td>
+					<td><a href="/burgers/delete/${burger.id}">Delete</a> | <a href="/burgers/edit/${burger.id}">Edit</a></td>
 				</tr>
 			</c:forEach>
 		</table>
 	</div>
 
-		<h2>New Burger</h2>
 
-	<div class="centered">
+	<div class="burger-form">
+		<h2>New Burger</h2>
 
 		<form:form action="/burgers/add" method="post" modelAttribute="burger">
 			<p>
@@ -47,9 +47,9 @@
 				<form:errors path="burgerName" />
 			</p>
 			<p>
-				<form:label path="RestaurantName">Restaurant name: </form:label>
-				<form:textarea path="RestaurantName" /><br/>
-				<form:errors path="RestaurantName" />
+				<form:label path="restaurantName">Restaurant name: </form:label>
+				<form:input path="restaurantName" /><br/>
+				<form:errors path="restaurantName" />
 			</p>
 			<p>
 				<form:label path="rating">Rating out of 5? </form:label>
@@ -58,7 +58,7 @@
 			</p>
 			<p>
 				<form:label path="notes">Notes on the burger? </form:label>
-				<form:input path="notes" /><br/>
+				<form:textarea path="notes" /><br/>
 				<form:errors path="notes" />
 			</p>
 			<input type="submit" value="Submit" />

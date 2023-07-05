@@ -11,19 +11,26 @@
 </head>
 
 <body>
-	<div class="centered">
-		<table>
-			<tr>
-				<th>Burger Name</th>
-				<th>Restaurant Name</th>
-				<th>Rating</th>
-			</tr>
-			<tr>
-				<td><c:out value="${burgerToEdit.burgerName}"></c:out></td>
-				<td><c:out value="${burgerToEdit.restaurantName}"></c:out></td>
-				<td><c:out value="${burgerToEdit.rating}"></c:out></td>
-			</tr>
-		</table>
-	</div>
+  <div class="burger-info">
+    <div class="info-row">
+      <span class="label">Burger Name:</span>
+      <span class="value">${burgerToEdit.burgerName}</span>
+    </div>
+    <div class="info-row">
+      <span class="label">Restaurant Name:</span>
+      <span class="value">${burgerToEdit.restaurantName}</span>
+    </div>
+    <div class="info-row">
+      <span class="label">Rating:</span>
+      <span class="value">${burgerToEdit.rating}</span>
+    </div>
+    <div class="info-row">
+      <span class="label">Notes:</span>
+      <span class="value">${burgerToEdit.notes}</span>
+    </div>
+    <a href="/burgers">Home</a>
+  </div>
+  
+	
 </body>
 </html>

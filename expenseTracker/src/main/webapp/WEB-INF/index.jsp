@@ -29,7 +29,7 @@
 				<tr>
 					<td><a href="/expenses/${expense.id}">${expense.expenseName}</a></td>
 					<td>${expense.vendorName}</td>
-					<td>${expense.amount}</td>
+					<td>$${expense.amount}</td>
 					<td><a href="/expenses/delete/${expense.id}">Delete</a> | <a href="/expenses/edit/${expense.id}">Edit</a></td>
 				</tr>
 			</c:forEach>

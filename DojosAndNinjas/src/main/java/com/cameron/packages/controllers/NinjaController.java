@@ -36,6 +36,8 @@ public class NinjaController {
 	@PostMapping("/new")
 	public String AddNewDojo(@Valid @ModelAttribute("newNinja")Ninja newNinja, BindingResult result, Model model) {
 		if(result.hasErrors()) {
+			List<Dojo> allDojos = this.dService.getAllDojos();
+			model.addAttribute("dojos", allDojos);
 	        model.addAttribute("errors", result.getAllErrors());
 			return "newNinja.jsp";
 		}

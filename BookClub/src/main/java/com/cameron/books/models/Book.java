@@ -29,12 +29,12 @@ public class Book {
 	private String title;
 	@NotNull
 	@Size(min = 5, max = 200)
-	private String toughts;
+	private String thoughts;
 	@NotNull
 	@Size(min = 3, max = 40)
 	private String author;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "users")
 	private User user;
 	@Column(updatable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -55,12 +55,12 @@ public class Book {
 	public Book() {}
 
 	public Book(Long id, @NotNull @Size(min = 5, max = 200) String title,
-			@NotNull @Size(min = 5, max = 200) String toughts, @NotNull @Size(min = 3, max = 40) String author,
+			@NotNull @Size(min = 5, max = 200) String thoughts, @NotNull @Size(min = 3, max = 40) String author,
 			User user, Date createdAt, Date updatedAt) {
 		super();
 		this.id = id;
 		this.title = title;
-		this.toughts = toughts;
+		this.thoughts = thoughts;
 		this.author = author;
 		this.user = user;
 		this.createdAt = createdAt;
@@ -83,12 +83,12 @@ public class Book {
 		this.title = title;
 	}
 
-	public String getToughts() {
-		return toughts;
+	public String getThoughts() {
+		return thoughts;
 	}
 
-	public void setToughts(String toughts) {
-		this.toughts = toughts;
+	public void setThoughts(String thoughts) {
+		this.thoughts = thoughts;
 	}
 
 	public String getAuthor() {

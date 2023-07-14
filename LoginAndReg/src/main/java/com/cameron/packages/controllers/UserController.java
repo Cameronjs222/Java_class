@@ -66,6 +66,10 @@ public class UserController {
 	
 	@GetMapping("/home")
 	public String home(HttpSession session, Model model) {
+		
+		if((Long) session.getAttribute("userId") == null) {
+			return "redirect:/user";
+		}
 		User currentUser = this.userService.getById((Long) session.getAttribute("userId"));
 		model.addAttribute("user", currentUser);
 		return "home.jsp";

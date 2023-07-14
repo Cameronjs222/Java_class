@@ -11,6 +11,8 @@
 </head>
 
 <body>
-
+<h1>Welcome, <c:out value="${user.userName}"></c:out> </h1>
+<p>Nothing to see here yet</p>
+<a href="/user/logout">logout</a>
 </body>
 </html>

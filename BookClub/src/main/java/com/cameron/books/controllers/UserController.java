@@ -42,7 +42,7 @@ public class UserController {
 	        return "login.jsp";
 		}
 		session.setAttribute("userId", newestUser.getId());
-		return "redirect:/home";
+		return "redirect:/books";
 		
 	}
 	
@@ -54,7 +54,7 @@ public class UserController {
             model.addAttribute("newUser", new User());
             model.addAttribute("errors", result.getAllErrors());
            System.out.print(result.getAllErrors()); 
-            return "error.jsp";
+            return "login.jsp";
         }
         else {
         	session.setAttribute("userId", user.getId());

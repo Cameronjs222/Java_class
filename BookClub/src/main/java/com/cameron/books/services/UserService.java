@@ -52,7 +52,7 @@ public class UserService {
 		Optional<User> currentUser = this.userRepo.findByEmail(loginUser.getEmail());
 		System.out.print(currentUser);
 		if(!currentUser.isPresent()) {
-			result.rejectValue("email", "NotFound", "Account not Found");
+			result.rejectValue("email", "NotFound", "Invalid credentials");
 			return null;
 			}
 		User returningUser = currentUser.get();

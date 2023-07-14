@@ -3,14 +3,19 @@ package com.cameron.packages.services;
 import java.util.Optional;
 
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
+import com.cameron.packages.models.LoginUser;
 import com.cameron.packages.models.User;
 import com.cameron.packages.repositories.UserRepository;
 
+import jakarta.validation.Valid;
+
 @Service
 public class UserService {
+	@Autowired
 	private UserRepository userRepo;
 	
     public void save(User user) {
@@ -38,10 +43,28 @@ public class UserService {
     	 	
     }
 
-	public Object getById(Long id) {
-		this.userRepo.findById(id).orElse(null);
-		// TODO Auto-generated method stub
-		return null;
+	public User getById(Long id) {
+		return this.userRepo.findById(id).orElse(null);
+	}
+
+	public User login(@Valid LoginUser loginUser, BindingResult result) {
+		System.out.print(loginUser);
+		Optional<User> currentUser = this.userRepo.findByEmail(loginUser.getEmail());
+		System.out.print(currentUser);
+		if(!currentUser.isPresent()) {
+			result.rejectValue("email", "NotFound", "Invalid credentials");
+			return null;
+			}
+		User returningUser = currentUser.get();
+		
+		if(!BCrypt.checkpw(loginUser.getPassword(), returningUser.getPassword())) {
+			result.rejectValue("password", "Matches", "Invalid credentials");
+		}
+		
+		if(result.hasErrors()) {
+			return null;
+		}
+		return returningUser;
 	}
     
     

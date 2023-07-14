@@ -11,7 +11,7 @@ public class BookService {
 
 	@Autowired
 	private BookRepository bookRepo;
-	
+
 	public Book createNewBook(Book newBook) {
 		return this.bookRepo.save(newBook);
 	}

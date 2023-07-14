@@ -15,7 +15,8 @@
 <body>
 
 	<h1>New Book</h1>
-	<form:form action="/books/create" method="post" modelAttribute="newBook">
+	<form:form action="/books/create" method="post"
+		modelAttribute="newBook">
 		<p>
 			<form:label path="title">Title</form:label>
 			<form:errors path="title" />

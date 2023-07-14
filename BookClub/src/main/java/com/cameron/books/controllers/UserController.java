@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.cameron.books.models.LoginUser;
 import com.cameron.books.models.User;
 import com.cameron.books.services.UserService;
 
@@ -21,36 +22,45 @@ public class UserController {
 	
 	
 	@Autowired
-	UserService uService;
+	UserService userService;
 	
 	
 	@GetMapping("")
-	public String loginPage(@ModelAttribute("newUser")User newUser) {
+	public String loginPage(@ModelAttribute("newUser")User newUser, @ModelAttribute("loginUser")User loginUser) {
 		
-		return "index.jsp";
+		return "login.jsp";
 		
 	}
 	
 	@PostMapping("/new")
 	public String registration(@Valid @ModelAttribute("newUser")User newUser, BindingResult result, HttpSession session, Model model) {
 		
-		User newestUser = this.uService.regestration(newUser, result);
+		User newestUser = this.userService.regestration(newUser, result);
 		
 		if(result.hasErrors()) {
 	        model.addAttribute("errors", result.getAllErrors());
-	        return "index.jsp";
+	        return "login.jsp";
 		}
-		
 		session.setAttribute("userId", newestUser.getId());
 		return "redirect:/home";
 		
 	}
 	
-	@GetMapping("/home")
-	public String home(Model model, HttpSession session) {
-		Long currentUser = (Long) session.getAttribute("userId");
-		model.addAttribute("currentUser", this.uService.getById(currentUser));
-		return "home.jsp";
+	@PostMapping("/login")
+	public String home(@Valid @ModelAttribute("loginUser")LoginUser loginUser, BindingResult result, Model model, HttpSession session) {
+		User user = userService.login(loginUser, result);
+	    
+        if(result.hasErrors()) {
+            model.addAttribute("newUser", new User());
+            model.addAttribute("errors", result.getAllErrors());
+           System.out.print(result.getAllErrors()); 
+            return "error.jsp";
+        }
+        else {
+        	session.setAttribute("userId", user.getId());
+        	return "redirect:/books";        	
+        }
+    
 		
 	}
 }

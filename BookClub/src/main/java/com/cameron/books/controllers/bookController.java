@@ -18,7 +18,7 @@ import jakarta.validation.Valid;
 @RequestMapping("/books")
 public class bookController {
 	
-	@Autowired
+	@Autowired 
 	private UserService userService;
 	@Autowired
 	private BookService bookService;
@@ -35,7 +35,7 @@ public class bookController {
 			return "edit.jsp";
 		}
 		else {
-//			newBook.setUser(this.userService.getById((Long) session.getAttribute("userId")));
+			newBook.setUser(this.userService.getById((Long) session.getAttribute("userId")));
 			System.out.print(newBook.getTitle());
 			bookService.createNewBook(newBook);
 			return "redirect:/index.jsp";

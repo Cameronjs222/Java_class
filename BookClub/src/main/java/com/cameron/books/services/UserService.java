@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
+import com.cameron.books.models.LoginUser;
 import com.cameron.books.models.User;
 import com.cameron.books.repositories.UserRepository;
+
+import jakarta.validation.Valid;
 
 @Service
 public class UserService {
@@ -42,6 +45,26 @@ public class UserService {
 
 	public User getById(Long id) {
 		return this.userRepo.findById(id).orElse(null);
+	}
+
+	public User login(@Valid LoginUser loginUser, BindingResult result) {
+		System.out.print(loginUser);
+		Optional<User> currentUser = this.userRepo.findByEmail(loginUser.getEmail());
+		System.out.print(currentUser);
+		if(!currentUser.isPresent()) {
+			result.rejectValue("email", "NotFound", "Account not Found");
+			return null;
+			}
+		User returningUser = currentUser.get();
+		
+		if(!BCrypt.checkpw(loginUser.getPassword(), returningUser.getPassword())) {
+			result.rejectValue("password", "Matches", "Invalid credentials");
+		}
+		
+		if(result.hasErrors()) {
+			return null;
+		}
+		return returningUser;
 	}
     
     

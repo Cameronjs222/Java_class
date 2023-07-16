@@ -23,8 +23,10 @@ public class UserService {
     }
     
     public User regestration(User newUser, BindingResult result) {
+    	System.out.println("Before");
 		Optional<User> potentialUser = userRepo.findByEmail(newUser.getEmail());
-    	if (potentialUser.isPresent()) {
+    	System.out.println("After");
+		if (potentialUser.isPresent()) {
     		result.rejectValue("Email", "Matches", "Email is all ready registered");
     	}
     	

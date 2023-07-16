@@ -11,6 +11,26 @@
 </head>
 
 <body>
-
+		<table>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Title</th>
+					<th>Author Name</th>
+					<th>Posted by</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="book" items="${books}">
+					<tr>
+						<td><c:out value="${book.id}"></c:out></td>
+						<td><a href="/books/${book.id }"><c:out value="${book.title}"></c:out></a></td>
+						<td><c:out value="${book.author}"></c:out></td>
+						<td><c:out value="${book.user.name}"></c:out></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	
 </body>
 </html>

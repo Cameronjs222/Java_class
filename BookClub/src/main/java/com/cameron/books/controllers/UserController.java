@@ -27,14 +27,14 @@ public class UserController {
 	
 	@GetMapping("")
 	public String loginPage(@ModelAttribute("newUser")User newUser, @ModelAttribute("loginUser")User loginUser) {
-		
+		System.out.println("First");
 		return "login.jsp";
 		
 	}
 	
 	@PostMapping("/new")
-	public String registration(@Valid @ModelAttribute("newUser")User newUser, BindingResult result, HttpSession session, Model model) {
-		
+	public String registration(@Valid @ModelAttribute("newUser")User newUser, BindingResult result, @ModelAttribute("loginUser")User loginUser, HttpSession session, Model model) {
+		System.out.println("second");
 		User newestUser = this.userService.regestration(newUser, result);
 		
 		if(result.hasErrors()) {

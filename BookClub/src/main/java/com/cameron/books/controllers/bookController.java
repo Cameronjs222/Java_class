@@ -1,10 +1,14 @@
 package com.cameron.books.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -24,27 +28,67 @@ public class bookController {
 	private BookService bookService;
 	
 	@GetMapping("")
-	public String form(@ModelAttribute("newBook")Book newBook) {
+	public String form(@ModelAttribute("userBook")Book userBook) {
 		return "edit.jsp";
 	}
 	
-	@PostMapping("/create")
-	public String submitBook(@Valid @ModelAttribute("newBook")Book newBook, BindingResult result, HttpSession session) {
+	@PostMapping("/create/{id}")
+	public String updateBook(@Valid @ModelAttribute("userBook")Book userBook, BindingResult result, HttpSession session) {
 		
 		if(result.hasErrors()) {
 			return "edit.jsp";
 		}
 		else {
-			newBook.setUser(this.userService.getById((Long) session.getAttribute("userId")));
-			System.out.print(newBook.getTitle());
-			bookService.createNewBook(newBook);
-			return "redirect:/index.jsp";
+			userBook.setUser(this.userService.getById((Long) session.getAttribute("userId")));
+			System.out.print(userBook.getTitle());
+			bookService.saveBook(userBook);
+			return "redirect:/books/all";
 			
 		}
+	}
+	
+	@PostMapping("/create/")
+	public String submitBook(@Valid @ModelAttribute("userBook")Book userBook, BindingResult result, HttpSession session) {
 		
+		if(result.hasErrors()) {
+			return "edit.jsp";
+		}
+		else {
+			userBook.setUser(this.userService.getById((Long) session.getAttribute("userId")));
+			System.out.print(userBook.getTitle());
+			bookService.saveBook(userBook);
+			return "redirect:/books/all";
+			
+		}
+	}
+	@GetMapping("/all")
+	public String allBooks(HttpSession session, Model model) {
+		model.addAttribute("currentUser", this.userService.getById((Long) session.getAttribute("userId")));
+		List<Book> allBooks = this.bookService.findAllBooks();
+		model.addAttribute("books", allBooks );
+		return "index.jsp";
 		
-		
-		
-		
+	}
+	
+	@GetMapping("/{bookId}")
+	public String oneBook(HttpSession session, Model model, @PathVariable("bookId")Long bookId) {
+		model.addAttribute("currentUser", session.getAttribute("userId"));
+		model.addAttribute("book", this.bookService.findById(bookId));
+		return "view.jsp";
+	}
+	
+	@GetMapping("/edit/{bookId}")
+	public String editBook(@PathVariable("bookId")Long bookId, Model model) {
+		Book userBook = this.bookService.findById(bookId);
+		model.addAttribute("userBook", userBook);
+		model.addAttribute("bookId", bookId);
+		return "edit.jsp";
+	}
+	
+	@GetMapping("/delete/{bookId}")
+	public String deleteBook(@PathVariable("bookId")Long bookId, Model model) {
+		System.out.println("test");
+		this.bookService.deleteBook(bookId);
+		return "redirect:/books/all";
 	}
 }

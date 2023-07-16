@@ -30,7 +30,7 @@
         <c:forEach var="book" items="${books}">
           <tr>
             <td><c:out value="${book.id}"></c:out></td>
-            <td><a href="/books/${book.id}"><c:out value="${book.title}"></c:out></a></td>
+            <td><a class="link" href="/books/${book.id}"><c:out value="${book.title}"></c:out></a></td>
             <td><c:out value="${book.author}"></c:out></td>
             <td><c:out value="${book.user.name}"></c:out></td>
           </tr>
@@ -38,8 +38,8 @@
       </tbody>
     </table>
 
-    <a href="/books">+ Add to my shelf</a>
-    <a href="/user/logout">Logout</a>
+    <a class="link" href="/books">+ Add to my shelf</a>
+    <a class="link" href="/user/logout">Logout</a>
   </div>
 </body>
 </html>

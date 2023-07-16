@@ -24,12 +24,12 @@
     </c:choose>
     <form:form action="/books/create/${bookId}" method="post" modelAttribute="userBook" class="book-form">
       <p>
-        <form:label path="title">Title</form:label>
+        <form:label path="title">Title</form:label><br/>
         <form:errors path="title" />
         <form:input path="title" />
       </p>
       <p>
-        <form:label path="author">Author of the book: </form:label>
+        <form:label path="author">Author of the book: </form:label><br/>
         <form:errors path="author" />
         <form:input path="author" />
       </p>
@@ -38,7 +38,7 @@
         <form:errors path="thoughts" />
         <form:textarea path="thoughts" />
       </p>
-      <input type="submit" value="Submit" class="submit-button" />
+      <input type="submit" value="Submit" class="button" />
     </form:form>
   </div>
 </body>

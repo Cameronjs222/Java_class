@@ -28,7 +28,7 @@ public class Book {
 	@Size(min = 5, max = 200)
 	private String title;
 	@NotNull
-	@Size(min = 5, max = 200)
+	@Size(min = 5, max = 500)
 	private String thoughts;
 	@NotNull
 	@Size(min = 3, max = 40)

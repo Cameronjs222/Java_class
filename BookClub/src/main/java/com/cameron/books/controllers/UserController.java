@@ -42,7 +42,7 @@ public class UserController {
 	        return "login.jsp";
 		}
 		session.setAttribute("userId", newestUser.getId());
-		return "redirect:/books";
+		return "redirect:/books/all";
 		
 	}
 	
@@ -58,9 +58,15 @@ public class UserController {
         }
         else {
         	session.setAttribute("userId", user.getId());
-        	return "redirect:/books";        	
+        	return "redirect:/books/all";        	
         }
     
 		
+	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/user";
 	}
 }

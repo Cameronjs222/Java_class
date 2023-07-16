@@ -11,26 +11,35 @@
 </head>
 
 <body>
-		<table>
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Title</th>
-					<th>Author Name</th>
-					<th>Posted by</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="book" items="${books}">
-					<tr>
-						<td><c:out value="${book.id}"></c:out></td>
-						<td><a href="/books/${book.id }"><c:out value="${book.title}"></c:out></a></td>
-						<td><c:out value="${book.author}"></c:out></td>
-						<td><c:out value="${book.user.name}"></c:out></td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	
+  <div class="container">
+    <h1>
+      Welcome
+      <c:out value="${currentUser.name}"></c:out>
+    </h1>
+    <h3>Books from everyone's shelves:</h3>
+    <table class="book-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Author Name</th>
+          <th>Posted by</th>
+        </tr>
+      </thead>
+      <tbody>
+        <c:forEach var="book" items="${books}">
+          <tr>
+            <td><c:out value="${book.id}"></c:out></td>
+            <td><a href="/books/${book.id}"><c:out value="${book.title}"></c:out></a></td>
+            <td><c:out value="${book.author}"></c:out></td>
+            <td><c:out value="${book.user.name}"></c:out></td>
+          </tr>
+        </c:forEach>
+      </tbody>
+    </table>
+
+    <a href="/books">+ Add to my shelf</a>
+    <a href="/user/logout">Logout</a>
+  </div>
 </body>
 </html>

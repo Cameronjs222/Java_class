@@ -13,27 +13,33 @@
 </head>
 
 <body>
-
-	<h1>New Book</h1>
-	<form:form action="/books/create/${bookId}" method="post"
-		modelAttribute="userBook">
-		<p>
-			<form:label path="title">Title</form:label>
-			<form:errors path="title" />
-			<form:input path="title" />
-		</p>
-		<p>
-			<form:label path="thoughts">Thoughts on the book: </form:label>
-			<form:errors path="thoughts" />
-			<form:textarea path="thoughts" />
-		</p>
-		<p>
-			<form:label path="author">Author of the book: </form:label>
-			<form:errors path="author" />
-			<form:input path="author" />
-		</p>
-		<input type="submit" value="Submit" />
-	</form:form>
-
+  <div class="container">
+    <c:choose>
+      <c:when test="${book.id}">
+        <h1>Change Book</h1>
+      </c:when>
+      <c:otherwise>
+        <h1>New Book</h1>
+      </c:otherwise>
+    </c:choose>
+    <form:form action="/books/create/${bookId}" method="post" modelAttribute="userBook" class="book-form">
+      <p>
+        <form:label path="title">Title</form:label>
+        <form:errors path="title" />
+        <form:input path="title" />
+      </p>
+      <p>
+        <form:label path="author">Author of the book: </form:label>
+        <form:errors path="author" />
+        <form:input path="author" />
+      </p>
+      <p>
+        <form:label path="thoughts">Thoughts on the book: </form:label><br/>
+        <form:errors path="thoughts" />
+        <form:textarea path="thoughts" />
+      </p>
+      <input type="submit" value="Submit" class="submit-button" />
+    </form:form>
+  </div>
 </body>
 </html>

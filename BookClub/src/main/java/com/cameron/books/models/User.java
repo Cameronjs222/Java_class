@@ -11,6 +11,9 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
@@ -41,6 +44,15 @@ public class User {
 	private String confirm;
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Book> books;
+	@OneToMany(mappedBy = "creator", fetch = FetchType.LAZY)
+	private List<Club> createdClubs;
+	@ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "club_members", 
+        joinColumns = @JoinColumn(name = "member_id"), 
+        inverseJoinColumns = @JoinColumn(name = "club_id")
+    )
+    private List<Club> clubs;
 	@Column(updatable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createdAt;
